@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns:fx="http://javafx.com/fxml"
+          xmlns="http://javafx.com/javafx"
+          fx:controller="ntua.multimedia.libraryproject.controllers.user.UserFormController"
+          alignment="CENTER"
+          hgap="10"
+          vgap="20"
+          stylesheets="@../static/styles.css">
+    <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+    <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+    <Label text="Confirm password:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <PasswordField fx:id="confirmPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+    <Label text="First name:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <TextField fx:id="firstNameField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+    <Label text="Last name:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+    <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+    <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+    <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+    <Label text="ID card number:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+    <TextField fx:id="idCardNumberField" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+    <HBox GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="7" alignment="CENTER_RIGHT"
+          spacing="20">
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Cancel" onAction="#handleCancel"/>
+        <Button fx:id="saveButton" text="Save" onAction="#handleSave"/>
+    </HBox>
+</GridPane>

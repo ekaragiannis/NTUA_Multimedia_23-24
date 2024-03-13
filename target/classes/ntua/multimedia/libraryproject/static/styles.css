@@ -1,0 +1,45 @@
+/* styles.css */
+.label, .text-field, .button {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Arial";
+}
+
+.table-view {
+    -fx-font-family: "Arial";
+    -fx-font-size: 11pt;
+}
+
+.table-view .column-header {
+    -fx-font-weight: BOLD;
+}
+
+.table-view .table-column {
+    -fx-alignment: CENTER;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-cursor: hand;
+}
+
+/* Style for the toggle buttons */
+.toggle-button {
+    -fx-background-color: transparent; /* No background color */
+    -fx-font-weight: bold; /* Bold font */
+    -fx-alignment: center-left;
+}
+
+/* Style for the selected toggle button */
+.toggle-button:selected {
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: lightblue;
+}
+
+/* Style for hover effect */
+.toggle-button:hover {
+    -fx-cursor: hand; /* Change cursor to hand */
+}

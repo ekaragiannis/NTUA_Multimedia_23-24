@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns:fx="http://javafx.com/fxml"
+          xmlns="http://javafx.com/javafx"
+          fx:controller="ntua.multimedia.libraryproject.controllers.admin.BookFormController"
+          alignment="CENTER"
+          hgap="10"
+          vgap="15"
+          stylesheets="@../static/styles.css"
+>
+    <Label text="ISBN:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <TextField fx:id="isbnField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+    <Label text="Title:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <TextField fx:id="titleField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+    <Label text="Author:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <TextField fx:id="authorField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+    <Label text="Publisher:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <TextField fx:id="publisherField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+    <Label text="Published Year:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+    <Spinner fx:id="publishedYearSpinner" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+    <Label text="Category:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+    <ComboBox fx:id="categoryComboBox" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+    <Label text="Total Copies:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+    <Spinner fx:id="totalCopiesSpinner" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+    <HBox GridPane.rowIndex="7" GridPane.columnSpan="2" alignment="CENTER_RIGHT"
+          spacing="20">
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Cancel" onAction="#handleCancel"/>
+        <Button fx:id="saveButton" text="Save" onAction="#handleSave"/>
+    </HBox>
+</GridPane>

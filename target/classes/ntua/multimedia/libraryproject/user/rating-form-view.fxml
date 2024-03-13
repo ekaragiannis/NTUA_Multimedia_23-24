@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      xmlns="http://javafx.com/javafx"
+      fx:controller="ntua.multimedia.libraryproject.controllers.user.RatingFormController"
+      alignment="CENTER"
+      spacing="20"
+      stylesheets="@../static/styles.css">
+    <padding>
+        <Insets top="20" bottom="20" left="20" right="20"/>
+    </padding>
+    <VBox spacing="10">
+        <Label text="Rate:"/>
+        <Slider fx:id="ratingSlider" min="1" max="5" showTickLabels="true" showTickMarks="true"
+                majorTickUnit="1" minorTickCount="0" snapToTicks="true"/>
+    </VBox>
+    <VBox spacing="10">
+        <Label text="Description:"/>
+        <TextArea fx:id="descriptionArea" wrapText="true"/>
+    </VBox>
+    <VBox spacing="10">
+        <HBox alignment="CENTER_RIGHT" spacing="20">
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Close" onAction="#handleClose"/>
+            <Button text="Save" onAction="#handleSave"/>
+        </HBox>
+    </VBox>
+</VBox>

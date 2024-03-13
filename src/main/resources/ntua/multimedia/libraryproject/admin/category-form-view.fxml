@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns:fx="http://javafx.com/fxml"
+          xmlns="http://javafx.com/javafx"
+          fx:controller="ntua.multimedia.libraryproject.controllers.admin.CategoryFormController"
+          alignment="CENTER"
+          hgap="10"
+          vgap="20"
+          stylesheets="@../static/styles.css">
+    <Label text="Title:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <TextField fx:id="titleField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+    <HBox GridPane.rowIndex="1" GridPane.columnSpan="2" alignment="CENTER_RIGHT"
+          spacing="20">
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Cancel" onAction="#handleCancel"/>
+        <Button fx:id="saveButton" text="Save" onAction="#handleSave"/>
+    </HBox>
+</GridPane>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      xmlns="http://javafx.com/javafx"
+      fx:controller="ntua.multimedia.libraryproject.controllers.guest.GuestController"
+      spacing="10"
+      prefHeight="700"
+      prefWidth="1200"
+      stylesheets="@../static/styles.css">
+    <padding>
+        <Insets top="15" left="15" bottom="15" right="15"/>
+    </padding>
+    <HBox>
+        <ToggleButton fx:id="homeToggleBtn" text="Home"/>
+        <ToggleButton fx:id="loginToggleBtn" text="Login"/>
+        <ToggleButton fx:id="signupToggleBtn" text="Signup"/>
+    </HBox>
+    <VBox fx:id="contentVBox" VBox.vgrow="ALWAYS">
+
+    </VBox>
+</VBox>

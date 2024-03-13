@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      xmlns="http://javafx.com/javafx"
+      fx:controller="ntua.multimedia.libraryproject.controllers.admin.AdminController"
+      stylesheets="@../static/styles.css"
+      prefHeight="700"
+      prefWidth="1200"
+      spacing="5">
+    <padding>
+        <Insets left="15" top="15" right="15" bottom="15"/>
+    </padding>
+    <VBox VBox.vgrow="ALWAYS" spacing="10">
+        <HBox>
+            <ToggleButton fx:id="usersToggleBtn" text="Users"/>
+            <ToggleButton fx:id="categoriesToggleBtn" text="Categories"/>
+            <ToggleButton fx:id="booksToggleBtn" text="Books"/>
+            <ToggleButton fx:id="borrowingsToggleBtn" text="Borrowings"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="settingsButton" onMouseClicked="#handleSettingsBtnClick">
+                <graphic>
+                    <ImageView>
+                        <!-- Gear icon by https://icons8.com -->
+                        <!-- https://icons8.com/icon/zTSkVnVQ0nYV/settings -->
+                        <Image url="@../static/icons/icons8-gear-24.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+        <VBox VBox.vgrow="ALWAYS" fx:id="contentVBox" alignment="TOP_CENTER">
+        </VBox>
+    </VBox>
+</VBox>
