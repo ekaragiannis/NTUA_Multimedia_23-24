@@ -19,7 +19,15 @@ public class UserService {
     this.borrowingRepository = borrowingRepository;
   }
 
-  public User login(String username, String password) {
+  /**
+   * Logs in a user with the provided username and password.
+   *
+   * @param username The username of the user.
+   * @param password The password of the user.
+   * @return The user object if login is successful.
+   * @throws WrongCredentialsException If the provided username or password is incorrect.
+   */
+  public User login(String username, String password) throws WrongCredentialsException {
     return userRepository
         .findByUsername(username)
         .map(
@@ -33,21 +41,51 @@ public class UserService {
         .orElseThrow(() -> new WrongCredentialsException("Username not found"));
   }
 
+  /**
+   * Retrieves all users
+   *
+   * @return An ArrayList containing all users.
+   */
   public ArrayList<User> findAll() {
     return userRepository.findAll();
   }
 
-  public User findById(String id) {
+  /**
+   * Retrieves a user by its ID.
+   *
+   * @param id The ID of the user to retrieve.
+   * @return The user with the specified ID.
+   * @throws InvalidIdException If the user with the specified ID is not found.
+   */
+  public User findById(String id) throws InvalidIdException {
     return userRepository.findById(id).orElseThrow(() -> new InvalidIdException("User not found"));
   }
 
-  public void delete(String id) {
+  /**
+   * Deletes a user by ID with associated borrowings.
+   *
+   * @param userId The ID of the user to delete.
+   */
+  public void delete(String userId) {
     borrowingRepository
-        .findByBookId(id)
+        .findByUserId(userId)
         .forEach(borrowing -> borrowingRepository.delete(borrowing.getId()));
-    userRepository.delete(id);
+    userRepository.delete(userId);
   }
 
+  /**
+   * Creates or updates a user with the provided information.
+   *
+   * @param user The user to update or create. If null, a new user will be created.
+   * @param username The username of the user.
+   * @param password The password of the user.
+   * @param firstName The first name of the user.
+   * @param lastName The last name of the user.
+   * @param idCardNumber The identification card number of the user.
+   * @param email The email address of the user.
+   * @throws DuplicateFieldException If any of the fields (username, email, idCardNumber) already
+   *     exists.
+   */
   public void createOrUpdate(
       User user,
       String username,
@@ -55,7 +93,8 @@ public class UserService {
       String firstName,
       String lastName,
       String idCardNumber,
-      String email) {
+      String email)
+      throws DuplicateFieldException {
     String userId = user == null ? GenerateIdUtil.generateUniqueId(userRepository) : user.getId();
     String encryptedPassword = EncryptionUtil.encrypt(password);
     User newUser =

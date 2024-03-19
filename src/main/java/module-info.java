@@ -1,7 +1,6 @@
 module ntua.multimedia.libraryproject {
   requires javafx.controls;
   requires javafx.fxml;
-  requires javafaker;
 
   opens ntua.multimedia.libraryproject to
       javafx.fxml;
@@ -40,4 +39,8 @@ module ntua.multimedia.libraryproject {
       javafx.fxml;
 
   exports ntua.multimedia.libraryproject.models.entities;
+
+  opens ntua.multimedia.libraryproject.exceptions to javafx.fxml;
+
+  exports ntua.multimedia.libraryproject.exceptions;
 }

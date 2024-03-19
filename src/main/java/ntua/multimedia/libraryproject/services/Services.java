@@ -20,7 +20,11 @@ public class Services {
             repositories.getBorrowingRepository(),
             repositories.getRatingRepository());
     this.categoryService =
-        new CategoryService(repositories.getCategoryRepository(), repositories.getBookRepository());
+        new CategoryService(
+            repositories.getCategoryRepository(),
+            repositories.getBookRepository(),
+            repositories.getBorrowingRepository(),
+            repositories.getRatingRepository());
     this.borrowingService = new BorrowingService(repositories.getBorrowingRepository());
     this.ratingService =
         new RatingService(

@@ -18,7 +18,8 @@ import ntua.multimedia.libraryproject.exceptions.InvalidBorrowingRequestExceptio
 import ntua.multimedia.libraryproject.models.entities.*;
 import ntua.multimedia.libraryproject.models.tableRows.BookRow;
 import ntua.multimedia.libraryproject.services.Services;
-import ntua.multimedia.libraryproject.utils.CommonFunctionalityUtil;
+import ntua.multimedia.libraryproject.utils.LogoutUtil;
+import ntua.multimedia.libraryproject.utils.PopupStageUtil;
 import ntua.multimedia.libraryproject.utils.custom.components.CustomGridPane;
 import ntua.multimedia.libraryproject.utils.custom.components.WrapLabel;
 import ntua.multimedia.libraryproject.utils.custom.components.alerts.FailureAlert;
@@ -66,8 +67,7 @@ public class UserController {
     MenuItem updateInfoItem = new MenuItem("Update Personal Info");
     updateInfoItem.setOnAction(e -> loadUserInfoForm());
     MenuItem logoutItem = new MenuItem("Logout");
-    logoutItem.setOnAction(
-        e -> CommonFunctionalityUtil.logout(settingsButton.getScene().getWindow(), services));
+    logoutItem.setOnAction(e -> LogoutUtil.logout(settingsButton.getScene().getWindow(), services));
     contextMenu.getItems().addAll(updateInfoItem, logoutItem);
     contextMenu.show(settingsButton, event.getScreenX(), event.getScreenY());
   }
@@ -78,7 +78,8 @@ public class UserController {
     String authorPart = authorFilterField.getText();
     String publishedYear = publishedYearFilterField.getText();
     try {
-      Integer.parseInt(publishedYear);
+      // If published year filter is applied, check if the input is integer.
+      if (!publishedYear.isEmpty()) Integer.parseInt(publishedYear);
       setBooksTable(titlePart.toLowerCase(), authorPart.toLowerCase(), publishedYear);
     } catch (NumberFormatException e) {
       FailureAlert alert = new FailureAlert("Published year field should be a number");
@@ -164,13 +165,12 @@ public class UserController {
 
   private CustomGridPane createBorrowingGridPane(Borrowing borrowing) {
     CustomGridPane gridPane = new CustomGridPane(true);
-    System.out.println(borrowing);
     Book book = services.getBookService().findById(borrowing.getBookId());
 
     WrapLabel titleLabel = new WrapLabel("Title:");
     WrapLabel titleValue = new WrapLabel(book.getTitle());
 
-    WrapLabel isbnLabel = new WrapLabel("Isbn:");
+    WrapLabel isbnLabel = new WrapLabel("ISBN:");
     WrapLabel isbnValue = new WrapLabel(book.getIsbn());
 
     WrapLabel approvedAtLabel = new WrapLabel("Approved At:");
@@ -387,7 +387,7 @@ public class UserController {
       loader.setControllerFactory(
           controllerType -> new UserFormController(services.getUserService(), currentUser));
       Parent root = loader.load();
-      CommonFunctionalityUtil.showPopupStage(
+      PopupStageUtil.showPopupStage(
           root, settingsButton.getScene().getWindow(), 420, 440, "Update Personal Info");
     } catch (Exception e) {
       FailureAlert alert = new FailureAlert("Something went wrong loading personal info form");
@@ -405,7 +405,7 @@ public class UserController {
           controllerType ->
               new RatingFormController(services.getRatingService(), rating, currentUserId, book));
       Parent root = loader.load();
-      CommonFunctionalityUtil.showPopupStage(
+      PopupStageUtil.showPopupStage(
           root, settingsButton.getScene().getWindow(), 340, 340, "Add Rating");
     } catch (Exception e) {
       FailureAlert alert = new FailureAlert("Something went wrong loading rating form.");

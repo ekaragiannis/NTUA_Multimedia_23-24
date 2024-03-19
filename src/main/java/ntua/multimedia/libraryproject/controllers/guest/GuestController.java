@@ -119,8 +119,7 @@ public class GuestController {
     PasswordField passwordField = new PasswordField();
 
     Button loginButton = new Button("Login");
-    loginButton.setOnAction(
-        e -> handleLoginSubmit(usernameField.getText(), passwordField.getText()));
+    loginButton.setOnAction(e -> handleLoginSubmit(usernameField, passwordField));
 
     gridPane.add(usernameLabel, 0, 0);
     gridPane.add(usernameField, 1, 0);
@@ -163,13 +162,13 @@ public class GuestController {
     signupButton.setOnAction(
         e ->
             handleSignupSubmit(
-                usernameField.getText(),
-                passwordField.getText(),
-                confirmPasswordField.getText(),
-                firstNameField.getText(),
-                lastNameField.getText(),
-                idCardNumberField.getText(),
-                emailField.getText()));
+                usernameField,
+                passwordField,
+                confirmPasswordField,
+                firstNameField,
+                lastNameField,
+                idCardNumberField,
+                emailField));
 
     gridPane.add(usernameLabel, 0, 0);
     gridPane.add(usernameField, 1, 0);
@@ -199,12 +198,14 @@ public class GuestController {
     contentVBox.getChildren().addAll(gridPane);
   }
 
-  private void handleLoginSubmit(String username, String password) {
+  private void handleLoginSubmit(TextField usernameField, PasswordField passwordField) {
     try {
-      if (username.equals("medialab") && password.equals("medialab_2024")) {
+      if (usernameField.getText().equals("medialab")
+          && passwordField.getText().equals("medialab_2024")) {
         setAdminScene();
       } else {
-        User user = services.getUserService().login(username, password);
+        User user =
+            services.getUserService().login(usernameField.getText(), passwordField.getText());
         setUserScene(user);
       }
     } catch (WrongCredentialsException e) {
@@ -250,14 +251,16 @@ public class GuestController {
   }
 
   private void handleSignupSubmit(
-      String username,
-      String password,
-      String confirmPassword,
-      String firstName,
-      String lastName,
-      String idCardNumber,
-      String email) {
-    String msg = validateFields(password, confirmPassword, email);
+      TextField usernameField,
+      PasswordField passwordField,
+      PasswordField confirmPasswordField,
+      TextField firstNameField,
+      TextField lastNameField,
+      TextField idCardNumberField,
+      TextField emailField) {
+    String msg =
+        validateFields(
+            passwordField.getText(), confirmPasswordField.getText(), emailField.getText());
     if (!msg.isEmpty()) {
       FailureAlert alert = new FailureAlert(msg);
       alert.showAndWait();
@@ -266,9 +269,23 @@ public class GuestController {
     try {
       services
           .getUserService()
-          .createOrUpdate(null, username, password, firstName, lastName, idCardNumber, email);
+          .createOrUpdate(
+              null,
+              usernameField.getText(),
+              passwordField.getText(),
+              firstNameField.getText(),
+              lastNameField.getText(),
+              idCardNumberField.getText(),
+              emailField.getText());
       SuccessAlert alert = new SuccessAlert("User was successfully created");
       alert.showAndWait();
+      usernameField.setText("");
+      passwordField.setText("");
+      confirmPasswordField.setText("");
+      firstNameField.setText("");
+      lastNameField.setText("");
+      idCardNumberField.setText("");
+      emailField.setText("");
     } catch (DuplicateFieldException e) {
       FailureAlert alert = new FailureAlert(e.getMessage());
       alert.showAndWait();

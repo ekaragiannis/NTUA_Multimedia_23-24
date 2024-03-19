@@ -19,7 +19,8 @@ import ntua.multimedia.libraryproject.models.tableRows.BorrowingRow;
 import ntua.multimedia.libraryproject.models.tableRows.CategoryRow;
 import ntua.multimedia.libraryproject.models.tableRows.UserRow;
 import ntua.multimedia.libraryproject.services.Services;
-import ntua.multimedia.libraryproject.utils.CommonFunctionalityUtil;
+import ntua.multimedia.libraryproject.utils.LogoutUtil;
+import ntua.multimedia.libraryproject.utils.PopupStageUtil;
 import ntua.multimedia.libraryproject.utils.custom.components.alerts.FailureAlert;
 
 public class AdminController {
@@ -71,7 +72,7 @@ public class AdminController {
     addCategoryItem.setOnAction(e -> handleCreateCategory());
     addBookItem.setOnAction(e -> handleCreateBook());
     logoutItem.setOnAction(
-        e -> CommonFunctionalityUtil.logout(settingsButton.getScene().getWindow(), services));
+        e -> LogoutUtil.logout(settingsButton.getScene().getWindow(), services));
     contextMenu.show(settingsButton, event.getScreenX(), event.getScreenY());
   }
 
@@ -109,6 +110,7 @@ public class AdminController {
   }
 
   private void handleDeleteCategory(String categoryId) {
+
     services.getCategoryService().delete(categoryId);
     setCategoriesTable();
   }
@@ -125,7 +127,7 @@ public class AdminController {
               new BookFormController(
                   services.getBookService(), services.getCategoryService(), book));
       Parent root = loader.load();
-      CommonFunctionalityUtil.showPopupStage(
+      PopupStageUtil.showPopupStage(
           root, settingsButton.getScene().getWindow(), 360, 400, "Add Book");
     } catch (Exception e) {
       FailureAlert alert = new FailureAlert("Something went wrong loading the book form.");
@@ -133,7 +135,7 @@ public class AdminController {
     }
   }
 
-  void createCategoryForm(Category category) {
+  public void createCategoryForm(Category category) {
     try {
       FXMLLoader loader =
           new FXMLLoader(
@@ -142,7 +144,7 @@ public class AdminController {
       loader.setControllerFactory(
           controllerType -> new CategoryFormController(services.getCategoryService(), category));
       Parent root = loader.load();
-      CommonFunctionalityUtil.showPopupStage(
+      PopupStageUtil.showPopupStage(
           root, settingsButton.getScene().getWindow(), 280, 140, "Add Category");
     } catch (Exception e) {
       FailureAlert alert = new FailureAlert("Something went wrong loading the category form.");
@@ -250,7 +252,7 @@ public class AdminController {
 
     TableView<CategoryRow> categoryTableView = new TableView<>();
 
-    TableColumn<CategoryRow, String> titleColumn = new TableColumn<>("Title");
+    TableColumn<CategoryRow, String> titleColumn = new TableColumn<>("Category");
     titleColumn.setCellValueFactory(cellData -> cellData.getValue().titleProperty());
     titleColumn.setStyle("-fx-alignment: CENTER; -fx-font-size: 11pt");
     categoryTableView.getColumns().add(titleColumn);
